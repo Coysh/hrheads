@@ -1,0 +1,631 @@
+{
+    "key": "group_5aa6a7152eebe",
+    "title": "Admin Settings",
+    "fields": [
+        {
+            "key": "field_5ad7593cd2ae7",
+            "label": "Header",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5acf42ba6fd42",
+            "label": "Header Layout",
+            "name": "header_layout",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "choices": {
+                "left-aligned": "Logo left, menu right",
+                "full-width-menu": "Logo left, full width menu"
+            },
+            "default_value": "left-aligned",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "layout": "vertical",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_622f2a27c8fa8",
+            "label": "Enable Mega Menu",
+            "name": "enable_mega_menu",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5aa6ab080d3b3",
+            "label": "Logo",
+            "name": "logo",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "return_format": "id",
+            "preview_size": "small",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "uploader": "",
+            "acfe_thumbnail": 0
+        },
+        {
+            "key": "field_623059c3aba9d",
+            "label": "Alternative Logo",
+            "name": "alternative_logo",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "return_format": "id",
+            "preview_size": "small",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "uploader": "",
+            "acfe_thumbnail": 0
+        },
+        {
+            "key": "field_5aa6aaff0d3b2",
+            "label": "Blog",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_64a8082901b33",
+            "label": "Disable Blog",
+            "name": "disable_blog",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5acf34c878111",
+            "label": "Blog Style",
+            "name": "blog_style",
+            "aria-label": "",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_64a8082901b33",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "choices": {
+                "standard": "Standard",
+                "isotope": "Isotope",
+                "classic": "Classic"
+            },
+            "default_value": "",
+            "return_format": "value",
+            "allow_null": 0,
+            "other_choice": 0,
+            "layout": "vertical",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_5b81644cf5d04",
+            "label": "Show Banner?",
+            "name": "show_banner",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Tick to show banners on blog posts.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_64a8082901b33",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
+        },
+        {
+            "key": "field_5aa6aaf00d3b1",
+            "label": "Development",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_61b2010016226",
+            "label": "Development Users",
+            "name": "development_users",
+            "aria-label": "",
+            "type": "user",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "role": [
+                "administrator"
+            ],
+            "allow_null": 0,
+            "multiple": 1,
+            "return_format": "id"
+        },
+        {
+            "key": "field_5aa6a71f9964c",
+            "label": "Require Login",
+            "name": "require_login",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Force users to login in order to view the website.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5d53e38eea59d",
+            "label": "Desktop Only",
+            "name": "desktop_only",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Hide website for smaller screens.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5d53e2b851b7d",
+            "label": "Login Message",
+            "name": "login_message",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Customise the message shown to logged out visitors.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5aa6a71f9964c",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "Website under development! Please login to view this page.",
+            "maxlength": "",
+            "rows": 2,
+            "placeholder": "",
+            "new_lines": "br",
+            "acfe_textarea_code": 0
+        },
+        {
+            "key": "field_60897d19d416d",
+            "label": "Desktop only message",
+            "name": "desktop_only_message",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Only shows if you are not logged in as one of the development users.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d53e38eea59d",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "70",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "We are currently optimising the site for smaller devices. In the meantime, please view the site on a desktop size screen.",
+            "placeholder": "We are currently optimising the site for smaller devices. In the meantime, please view the site on a desktop size screen.",
+            "maxlength": "",
+            "rows": 3,
+            "new_lines": "br",
+            "acfe_textarea_code": 0
+        },
+        {
+            "key": "field_60897e63e63d0",
+            "label": "Show on screen size",
+            "name": "desktop_only_size",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "The desktop only message will only show on devices this size or smaller.",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d53e38eea59d",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "30",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": 1024,
+            "placeholder": 1024,
+            "prepend": "",
+            "append": "px",
+            "min": "",
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_61b200ac16225",
+            "label": "Development Mode",
+            "name": "development_mode",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Only applies if you are logged in as one of the development users.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_64abcc59b1c21",
+            "label": "Show All Content",
+            "name": "",
+            "aria-label": "",
+            "type": "message",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "message": "<a href=\"\/?all_pages\">View content of all pages combined<\/a>",
+            "new_lines": "wpautop",
+            "esc_html": 0
+        },
+        {
+            "key": "field_623488888536b",
+            "label": "White Label",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_623488a88536c",
+            "label": "White Label",
+            "name": "white_label",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_62348a3a8536f",
+            "label": "White Label Text",
+            "name": "white_label_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_623488a88536c",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "Website by",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_62348a1a8536d",
+            "label": "White Label Company",
+            "name": "white_label_company",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_623488a88536c",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "Eldo™",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_62348a2e8536e",
+            "label": "White Label Website",
+            "name": "white_label_website",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_623488a88536c",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "https:\/\/www.eldo.co.uk",
+            "placeholder": ""
+        },
+        {
+            "key": "field_5ae335c305183",
+            "label": "Dashboard",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_5ad75b84ed7e6",
+            "label": "Welcome message",
+            "name": "welcome",
+            "aria-label": "",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "admin_only": 0,
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-admin"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfe_display_title": "",
+    "acfe_autosync": [
+        "json"
+    ],
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": "",
+    "modified": 1689080612
+}

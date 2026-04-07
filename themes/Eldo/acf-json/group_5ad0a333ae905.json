@@ -1,0 +1,219 @@
+{
+    "key": "group_5ad0a333ae905",
+    "title": "Page Header",
+    "fields": [
+        {
+            "key": "field_64affa9cde43d",
+            "label": "Banner Settings",
+            "name": "banner",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "Change the layout and content of the page’s banner.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "acfe_group_modal": 1,
+            "acfe_group_modal_close": 1,
+            "acfe_group_modal_button": "Edit Banner Settings",
+            "acfe_group_modal_size": "medium",
+            "sub_fields": [
+                {
+                    "key": "field_62d96854b379a",
+                    "label": "Banner Settings",
+                    "name": "banner_settings",
+                    "aria-label": "",
+                    "type": "button_group",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "default": "Banner with image",
+                        "image-right": "Image Right",
+                        "no-image": "Banner without image",
+                        "remove": "Remove banner"
+                    },
+                    "default_value": "",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "layout": "horizontal"
+                },
+                {
+                    "key": "field_66584a42cddab",
+                    "label": "Pre Title",
+                    "name": "pre_title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_62d96854b379a",
+                                "operator": "!=",
+                                "value": "remove"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
+                },
+                {
+                    "key": "field_62d965cee3a4a",
+                    "label": "Page Title",
+                    "name": "page_title",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "Use this to override the default banner title.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_62d96854b379a",
+                                "operator": "!=",
+                                "value": "remove"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "admin_only": 0,
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5ad0a33da87ff",
+                    "label": "Introduction",
+                    "name": "introduction",
+                    "aria-label": "",
+                    "type": "textarea",
+                    "instructions": "This will appear in the page banner, below the page title.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_62d96854b379a",
+                                "operator": "!=",
+                                "value": "remove"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "admin_only": 0,
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 4,
+                    "new_lines": "wpautop",
+                    "acfe_textarea_code": 0
+                },
+                {
+                    "key": "field_6347f0bc09919",
+                    "label": "Button",
+                    "name": "button",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_62d96854b379a",
+                                "operator": "!=",
+                                "value": "remove"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "admin_only": 0,
+                    "return_format": "array"
+                },
+                {
+                    "key": "field_64b0021e5850d",
+                    "label": "Banner will not be shown.",
+                    "name": "",
+                    "aria-label": "",
+                    "type": "message",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_62d96854b379a",
+                                "operator": "==",
+                                "value": "remove"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "admin_only": 0,
+                    "message": "",
+                    "new_lines": "wpautop",
+                    "esc_html": 0
+                }
+            ],
+            "acfe_seamless_style": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "acf_after_title",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "acfe_display_title": "",
+    "acfe_autosync": [
+        "json"
+    ],
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": "",
+    "modified": 1717062286
+}
