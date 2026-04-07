@@ -26,4 +26,4 @@ jobs:
             --exclude='.git*' \
             --exclude='node_modules/' \
             --exclude='uploads/' \
-            ./ hrheads.com@ssh.gb.stackcp.com:public_html/wp-content/
+            ./ hrheads.co.uk@ssh.gb.stackcp.com:public_html/wp-content/
