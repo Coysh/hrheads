@@ -1,6 +1,52 @@
 <?php
 require_once 'logging.php'; // Include logging functionality
 
+/**
+ * Executes a JobAdder GET request with consistent headers, timeout and retry logic.
+ *
+ * Retries are only applied for timeout/network-related errors.
+ *
+ * @param string $api_url
+ * @param string $access_token
+ * @param string $request_label
+ * @return array|WP_Error
+ */
+function jobadder_remote_get($api_url, $access_token, $request_label = 'JobAdder request')
+{
+	$max_attempts = 3;
+
+	for ($attempt = 1; $attempt <= $max_attempts; $attempt++) {
+		$response = wp_remote_get($api_url, [
+			'headers' => [
+				'Authorization' => 'Bearer ' . $access_token,
+				'Content-Type' => 'application/json'
+			],
+			'timeout' => 30,
+			'redirection' => 3,
+		]);
+
+		if (!is_wp_error($response)) {
+			return $response;
+		}
+
+		$error_message = $response->get_error_message();
+		$is_timeout_error = stripos($error_message, 'timed out') !== false
+			|| stripos($error_message, 'cURL error 28') !== false
+			|| stripos($error_message, 'Resolving timed out') !== false;
+
+		if (!$is_timeout_error || $attempt >= $max_attempts) {
+			return $response;
+		}
+
+		jobadder_log(
+			sprintf('%s timed out (attempt %d/%d). Retrying.', $request_label, $attempt, $max_attempts),
+			'warning'
+		);
+	}
+
+	return new WP_Error('jobadder_request_failed', 'JobAdder request failed after retries.');
+}
+
 // Ensure the API call prerequisites are met (token validity and refresh if necessary)
 function pre_jobadder_api_call()
 {
@@ -35,12 +81,7 @@ function jobadder_get_jobs()
 	$access_token = get_option('jobadder_access_token'); // Re-fetch in case it was refreshed
 	$api_url = 'https://api.jobadder.com/v2/jobs'; // API endpoint for jobs
 
-	$response = wp_remote_get($api_url, [
-		'headers' => [
-			'Authorization' => 'Bearer ' . $access_token,
-			'Content-Type' => 'application/json'
-		],
-	]);
+	$response = jobadder_remote_get($api_url, $access_token, 'Retrieve jobs');
 
 	if (is_wp_error($response)) {
 		jobadder_log('Failed to retrieve jobs: ' . $response->get_error_message(), 'error');
@@ -67,12 +108,7 @@ function jobadder_get_job_boards()
 	$access_token = get_option('jobadder_access_token'); // Re-fetch in case it was refreshed
 	$api_url = 'https://api.jobadder.com/v2/jobboards'; // API endpoint for job boards
 
-	$response = wp_remote_get($api_url, [
-		'headers' => [
-			'Authorization' => 'Bearer ' . $access_token,
-			'Content-Type' => 'application/json'
-		],
-	]);
+	$response = jobadder_remote_get($api_url, $access_token, 'Retrieve job boards');
 
 	if (is_wp_error($response)) {
 		jobadder_log('Failed to retrieve job boards: ' . $response->get_error_message(), 'error');
@@ -100,12 +136,7 @@ function jobadder_get_job_ads_from_board()
 	$job_board_id = JOBADDER_JOB_BOARD; // Use the predefined job board ID
 	$api_url = 'https://api.jobadder.com/v2/jobboards/' . $job_board_id . '/ads'; // Construct the API endpoint URL
 
-	$response = wp_remote_get($api_url, [
-		'headers' => [
-			'Authorization' => 'Bearer ' . $access_token,
-			'Content-Type' => 'application/json'
-		],
-	]);
+	$response = jobadder_remote_get($api_url, $access_token, 'Retrieve job ads from board');
 
 	if (is_wp_error($response)) {
 		jobadder_log('Failed to retrieve job ads: ' . $response->get_error_message(), 'error');
@@ -137,19 +168,9 @@ function jobadder_get_job_ad_details($adId)
 	$access_token = get_option('jobadder_access_token'); // Fetch the possibly refreshed token
 	$api_url = 'https://api.jobadder.com/v2/jobboards/' . $job_board_id . '/ads/' . $adId; // Construct the API endpoint URL with both boardId and adId
 
-	$response = wp_remote_get($api_url, [
-		'headers' => [
-			'Authorization' => 'Bearer ' . $access_token,
-			'Content-Type' => 'application/json'
-		],
-	]);
+	$response = jobadder_remote_get($api_url, $access_token, 'Retrieve job ad details');
 
 	//Get status code and response for debugging
-	if (is_wp_error($response)) {
-		jobadder_log('Failed to retrieve job ad details: ' . $response->get_error_message(), 'error');
-		return [];
-	}
-
 	if (is_wp_error($response)) {
 		jobadder_log('Failed to retrieve job ad details: ' . $response->get_error_message(), 'error');
 		return [];
@@ -173,6 +194,12 @@ function jobadder_get_job_ad_details($adId)
 
 function jobadder_get_job_details($jobId)
 {
+	if (!is_numeric($jobId) || (int) $jobId <= 0) {
+		jobadder_log('Skipping job details request because job ID is invalid: ' . print_r($jobId, true), 'warning');
+		return [];
+	}
+
+	$jobId = (int) $jobId;
 	jobadder_log('Get job details for job: ' . $jobId, 'info');
 
 	if (!pre_jobadder_api_call()) {
@@ -184,13 +211,7 @@ function jobadder_get_job_details($jobId)
 	$api_url = 'https://api.jobadder.com/v2/jobs/' . $jobId; // Construct the API endpoint URL for jobs
 	jobadder_log('API call: GET ' . $api_url, 'info');
 
-	$response = wp_remote_get($api_url, [
-		'headers' => [
-			'Authorization' => 'Bearer ' . $access_token,
-			'Content-Type' => 'application/json'
-		],
-		'timeout' => 30,
-	]);
+	$response = jobadder_remote_get($api_url, $access_token, 'Retrieve job details');
 
 	if (is_wp_error($response)) {
 		jobadder_log('Failed to retrieve job details: ' . $response->get_error_message(), 'error');

@@ -28,6 +28,42 @@ function find_acf_choice_value_by_label($label, $field_key)
 	return null;
 }
 
+/**
+ * Attempts to determine the JobAdder job ID from ad payload.
+ *
+ * @param array $ad
+ * @return int|null
+ */
+function extract_jobadder_job_id_from_ad($ad)
+{
+	if (!empty($ad['jobId']) && is_numeric($ad['jobId'])) {
+		$job_id = (int) $ad['jobId'];
+		return $job_id > 0 ? $job_id : null;
+	}
+
+	if (!empty($ad['reference']) && preg_match('/^(\d+)/', trim((string) $ad['reference']), $matches)) {
+		$job_id = (int) $matches[1];
+		return $job_id > 0 ? $job_id : null;
+	}
+
+	$link_candidates = [
+		$ad['links']['self'] ?? null,
+		$ad['links']['api']['self'] ?? null,
+		$ad['links']['ui']['self'] ?? null,
+	];
+
+	foreach ($link_candidates as $link) {
+		if (!empty($link) && preg_match('~/jobs/(\d+)~', (string) $link, $matches)) {
+			$job_id = (int) $matches[1];
+			if ($job_id > 0) {
+				return $job_id;
+			}
+		}
+	}
+
+	return null;
+}
+
 
 function update_jobs_from_jobadder()
 {
@@ -90,15 +126,25 @@ function update_jobs_from_jobadder()
 		jobadder_log('', 'info');
 		jobadder_log('-----Start Processing Job-----', 'info');
 
-		$ad = jobadder_get_job_ad_details($ad['adId']);
-		$job_id = (int) $ad['reference']; // strips ".1", ".12" etc.
-		$job = jobadder_get_job_details($job_id);
-		#echo "<pre>Ad:";print_r($ad);echo "\n\n\nJob:";print_r($job);echo "</pre>";
+		if (empty($ad) || empty($ad['adId'])) {
+			jobadder_log('Skipping ad because adId is missing.', 'warning');
+			continue;
+		}
 
+		$ad = jobadder_get_job_ad_details($ad['adId']);
 		if (empty($ad)) {
 			jobadder_log('Unable to retrieve job ad details.', 'error');
 			continue;
 		}
+
+		$job_id = extract_jobadder_job_id_from_ad($ad);
+		if (empty($job_id)) {
+			jobadder_log('Skipping ad because no valid numeric job ID was found. adId: ' . ($ad['adId'] ?? 'unknown') . ' | reference: ' . ($ad['reference'] ?? ''), 'warning');
+			continue;
+		}
+
+		$job = jobadder_get_job_details($job_id);
+		#echo "<pre>Ad:";print_r($ad);echo "\n\n\nJob:";print_r($job);echo "</pre>";
 
 		if (empty($job)) {
 			jobadder_log('Unable to retrieve job details for: ' . $ad['title'], 'error');
